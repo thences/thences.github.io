@@ -19,9 +19,9 @@ const backdropImages = [
 ];
 
 const projectImages = [
-  "/images/dark/dark-14.jpg",
-  "/images/dark/dark-12.jpg",
-  "/images/dark/dark-15.jpg",
+  "/images/projects/gestao-hospitalar.jpg",
+  "/images/projects/controle-gastos.jpg",
+  "/images/projects/foco-estudantes.jpg",
 ];
 
 function App() {
