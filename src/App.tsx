@@ -1,13 +1,40 @@
 import { lazy, Suspense } from "react";
 import { capabilities, profile, projects, stats } from "./content";
 
-const FrostScene = lazy(() => import("./components/FrostScene"));
+const DarkScene = lazy(() => import("./components/DarkScene"));
+
+const backdropImages = [
+  {
+    src: "/images/dark/dark-03.jpg",
+    className: "dark-backdrop__image dark-backdrop__image--beam",
+  },
+  {
+    src: "/images/dark/dark-06.jpg",
+    className: "dark-backdrop__image dark-backdrop__image--impact",
+  },
+  {
+    src: "/images/dark/dark-10.jpg",
+    className: "dark-backdrop__image dark-backdrop__image--portal",
+  },
+];
+
+const projectImages = [
+  "/images/dark/dark-14.jpg",
+  "/images/dark/dark-12.jpg",
+  "/images/dark/dark-15.jpg",
+];
 
 function App() {
   return (
     <div className="app-shell">
+      <div className="dark-backdrop" aria-hidden="true">
+        {backdropImages.map((image) => (
+          <img key={image.src} className={image.className} src={image.src} alt="" />
+        ))}
+      </div>
+
       <Suspense fallback={null}>
-        <FrostScene />
+        <DarkScene />
       </Suspense>
       <div className="atmosphere" aria-hidden="true" />
 
@@ -32,7 +59,7 @@ function App() {
       <main>
         <section id="home" className="hero section-frame">
           <div className="hero-copy">
-            <p className="eyebrow">Portfolio_CO_01 / {profile.location}</p>
+            <p className="eyebrow">Dark Portfolio / {profile.location}</p>
             <p className="recruiter-greeting">{profile.greeting}</p>
             <h1>{profile.name}</h1>
             <p className="hero-role">{profile.role}</p>
@@ -55,6 +82,9 @@ function App() {
           </div>
 
           <aside className="manifest" aria-label="Resumo profissional">
+            <div className="manifest-visual" aria-hidden="true">
+              <img src="/images/dark/dark-02.jpg" alt="" />
+            </div>
             <p className="eyebrow">Resumo</p>
             <p>
               Portfólio preparado para recrutadores: currículo disponível,
@@ -85,8 +115,9 @@ function App() {
           <div className="project-list">
             {projects.map((project, index) => (
               <article className="project-card" key={project.id}>
-                <div className="project-index" aria-hidden="true">
-                  0{index + 1}
+                <div className="project-media" aria-hidden="true">
+                  <img src={projectImages[index % projectImages.length]} alt="" />
+                  <span>0{index + 1}</span>
                 </div>
                 <div className="project-main">
                   <p className="project-code">
